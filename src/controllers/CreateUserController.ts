@@ -8,8 +8,8 @@ class CreateUserController {
 
         const {id, nome, email } = request.body;
 
-        if(!nome || nome.length ===0 || !email || email.length ===0){
-            return response.status(400).json({mensagem: "Informe o nome e o email"});
+        if(!nome || nome.length ===0){
+            return response.status(400).json({mensagem: "Informe o nome"});
         }
 
         const user = await createUserService.execute({id, nome, email});
