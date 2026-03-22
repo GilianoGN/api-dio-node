@@ -1,0 +1,31 @@
+{
+  "name": "api-dio-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typeorm": "tsx ./node_modules/typeorm/cli.js",
+    "migration:run": "npm run typeorm migration:run -- -d src/database/data-source.ts",
+    "migration:revert": "npm run typeorm migration:revert -- -d src/database/data-source.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "reflect-metadata": "^0.2.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.28",
+    "uuid": "^13.0.0"
+  }
+}
