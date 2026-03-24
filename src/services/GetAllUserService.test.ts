@@ -13,7 +13,6 @@ describe('GetAllUserService', () => {
     it ('Deve retornar todos os usuários', async () => {
         await fakeData.execute();
         const result = await getAllUserService.execute();
-        console.log(result);
         expect(result).toHaveLength(3);
         expect(result[0]).toHaveProperty('id');
         expect(result[0]?.nome).toBe('Algum usuário');

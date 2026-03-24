@@ -22,5 +22,9 @@ export function makeMockResponse<TResult>() {
         return response;
     }
 
+    response.send = () => {
+        return response;
+    }
+
     return response;
 }

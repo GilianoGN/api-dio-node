@@ -3,11 +3,13 @@ import type { Params } from 'express-serve-static-core';
 
 interface mockRequest {
     params?: Params;
+    body?: any;
 }
 
-export function makeMockRequest({ params}: mockRequest): Request{
+export function makeMockRequest({ params, body}: mockRequest): Request{
     const request = {
-        params: params || {}
+        params: params || {},
+        body: body || {}
     } as unknown;
 
     return request as Request;

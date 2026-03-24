@@ -24,7 +24,7 @@ describe('GetAllUserController', () => {
         const response = makeMockResponse();
         await getAllUserController.handle(request, response);
         expect(response.state.status).toBe(200);
-        expect(response.state.json).toEqual({user: mockUser});
+        expect(response.state.json).toEqual({users: mockUser});
         expect(mockGetAllUserService.execute).toHaveBeenCalledTimes(1);
     });
 
@@ -34,6 +34,6 @@ describe('GetAllUserController', () => {
         const response = makeMockResponse();
         await getAllUserController.handle(request, response);
         expect(response.state.status).toBe(200);
-        expect(response.state.json).toEqual({user: []});
+        expect(response.state.json).toEqual({users: []});
     });
 });
