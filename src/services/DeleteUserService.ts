@@ -1,16 +1,14 @@
-import { AppDataSource } from "../database/data-source.js";
+import { Repository } from "typeorm";
 import { User } from "../entities/User.js";
 
 class DeleteUserService {
+    constructor(private userRepository: Repository<User>){}
     async execute(id: string) {
-        const userRepository = AppDataSource.getRepository(User);
-        const userExists = await userRepository.findOneBy({ id });
-
+        const userExists = await this.userRepository.findOneBy({ id });
         if (!userExists) {
             throw new Error("Usuário não encontrado");
         }
-
-        await userRepository.delete(id);
+        await this.userRepository.delete(id);
         return userExists;
     }
 }

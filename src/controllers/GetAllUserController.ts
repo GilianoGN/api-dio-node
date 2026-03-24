@@ -2,10 +2,9 @@ import type { Request, Response } from 'express';
 import { GetAllUserService } from '../services/GetAllUserService.js';
 
 class GetAllUserController {
+    constructor(private getAllUserService: GetAllUserService){}
     async handle (request: Request, response: Response) {
-        const getAllUserService = new GetAllUserService();
-        const users = await getAllUserService.execute();
-
+        const users = await this.getAllUserService.execute();
         return response.status(200).json({users});
     }
 }

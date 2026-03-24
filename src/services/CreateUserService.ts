@@ -1,21 +1,19 @@
-import { AppDataSource } from "../database/data-source.js";
+import { Repository } from "typeorm";
 import { User } from "../entities/User.js";
 
 interface IUsuario {
-    id: string,
     nome: string,
     email: string,
 }
 
 class CreateUserService {
-    async execute({ id, nome, email }: IUsuario){
-        const userRepository = AppDataSource.getRepository(User);
-        const user = userRepository.create({
+    constructor(private userRepository: Repository<User>){}
+    async execute({ nome, email }: IUsuario){
+        const user = await this.userRepository.create({
             nome,
             email
         })
-
-        await userRepository.save(user);
+        await this.userRepository.save(user);
         return user;
     }
 }

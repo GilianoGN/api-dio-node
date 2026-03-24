@@ -1,4 +1,4 @@
-import { AppDataSource } from "../database/data-source.js";
+import { Repository } from "typeorm";
 import { User } from "../entities/User.js";
 
 interface IUserUpdate {
@@ -8,20 +8,15 @@ interface IUserUpdate {
 }
 
 class UpdateUserService {
+    constructor(private userRepository: Repository<User>){}
     async execute({ id, nome, email }: IUserUpdate) {
-        const userRepository = AppDataSource.getRepository(User);
-
-        const user = await userRepository.findOneBy({ id });
-
+        const user = await this.userRepository.findOneBy({ id });
         if (!user) {
             throw new Error("Usuário não encontrado");
         }
-
         user.nome = nome ?? user.nome;
         user.email = email ?? user.email;
-
-        await userRepository.save(user);
-
+        await this.userRepository.save(user);
         return user;
     }
 }

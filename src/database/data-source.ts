@@ -1,17 +1,14 @@
 import 'reflect-metadata';
+import { User } from '../entities/User.js';
 import { DataSource } from 'typeorm';
-
-const databasePath = process.env.NODE_ENV === 'test'
-    ? 'src/database/database.test.sqlite'
-    : 'src/database/database.sqlite';
 
 export const AppDataSource = new DataSource({
     type: "sqlite",
-    database: databasePath,
-    synchronize: false,
+    database: process.env.NODE_ENV === 'test' ? ':memory:' : 'src/database/database.sqlite',
+    synchronize: process.env.NODE_ENV === 'test',
     logging: false,
-    entities: ["./src/entities/*.ts"],
-    migrations: ["./src/database/migrations/*.ts"],
+    entities: [ User ],
+    migrations: process.env.NODE_ENV === 'test' ? [] : ["./src/database/migrations/*.ts"],
 });
 
 export default async(): Promise<DataSource> => {
